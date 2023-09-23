@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 3343479549488718892}
   - component: {fileID: 52651767381019334}
   - component: {fileID: 9121692826541979446}
+  - component: {fileID: 2701668730453818607}
   m_Layer: 5
   m_Name: CrystalInfo
   m_TagString: Untagged
@@ -163,6 +164,22 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &2701668730453818607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930000392359449645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98aebaa5a66bdcf418635ea234fb0851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundGroups:
+  - groupName: Test
+    audioClips:
+    - {fileID: 8300000, guid: 2e8904ac926fbc2438ab5ca759fd5c32, type: 3}
 --- !u!1 &6653142868573391750
 GameObject:
   m_ObjectHideFlags: 0
