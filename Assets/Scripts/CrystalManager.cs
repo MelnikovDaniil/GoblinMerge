@@ -27,14 +27,6 @@ public class CrystalManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Update()
-    {
-        //if (Input.GetKeyUp(KeyCode.Mouse0))
-        //{
-        //    CrystallClick();
-        //}
-    }
-
     public void CrystallClick()
     {
         var crystalInfo = crystalInfoPool.FirstOrDefault(x => !x.isBusy);
