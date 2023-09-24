@@ -9,6 +9,8 @@ public class CrystalManager : MonoBehaviour
     public static CrystalManager Instance;
 
     [SerializeField]
+    private ParticleSystem crystalParticles;
+    [SerializeField]
     private RectTransform displayCanvas;
     [SerializeField]
     private TextMeshProUGUI crystalsCountText;
@@ -27,13 +29,13 @@ public class CrystalManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            CrystallClick();
-        }
+        //if (Input.GetKeyUp(KeyCode.Mouse0))
+        //{
+        //    CrystallClick();
+        //}
     }
 
-    private void CrystallClick()
+    public void CrystallClick()
     {
         var crystalInfo = crystalInfoPool.FirstOrDefault(x => !x.isBusy);
         if (crystalInfo == null)
@@ -49,7 +51,13 @@ public class CrystalManager : MonoBehaviour
             }
         }
 
-        var crystalsCount = 50;
+        var mouseWorldPoint = Input.mousePosition;
+        mouseWorldPoint.z = 10.0f;
+        mouseWorldPoint = Camera.main.ScreenToWorldPoint(mouseWorldPoint);
+        crystalParticles.transform.position = mouseWorldPoint;
+        crystalParticles.Play();
+
+        var crystalsCount = 1;
         AddCrystals(crystalsCount);
         crystalInfo.ShowCrystalInfo(crystalsCount, Input.mousePosition);
     }
