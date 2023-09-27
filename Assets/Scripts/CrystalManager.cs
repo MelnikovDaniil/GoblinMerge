@@ -11,7 +11,7 @@ public class CrystalManager : MonoBehaviour
     [SerializeField]
     private ParticleSystem crystalParticles;
     [SerializeField]
-    private RectTransform displayCanvas;
+    private Canvas displayCanvas;
     [SerializeField]
     private TextMeshProUGUI crystalsCountText;
     [SerializeField]
@@ -29,12 +29,24 @@ public class CrystalManager : MonoBehaviour
 
     public void CrystallClick()
     {
+        var crystalsCount = 1;
+
+        var mouseWorldPoint = Input.mousePosition;
+        mouseWorldPoint.z = 10.0f;
+        mouseWorldPoint = Camera.main.ScreenToWorldPoint(mouseWorldPoint);
+
+        HitCrystal(crystalsCount, mouseWorldPoint);
+    }
+
+    public void HitCrystal(float crystalAmount, Vector2 postion)
+    {
         var crystalInfo = crystalInfoPool.FirstOrDefault(x => !x.isBusy);
         if (crystalInfo == null)
         {
             if (crystalInfoPool.Count < poolLimit)
             {
-                crystalInfo = Instantiate(crystalInfoPrefab, displayCanvas);
+                crystalInfo = Instantiate(crystalInfoPrefab, displayCanvas.transform);
+                crystalInfo.canvas = displayCanvas;
                 crystalInfoPool.Add(crystalInfo);
             }
             else
@@ -43,15 +55,11 @@ public class CrystalManager : MonoBehaviour
             }
         }
 
-        var mouseWorldPoint = Input.mousePosition;
-        mouseWorldPoint.z = 10.0f;
-        mouseWorldPoint = Camera.main.ScreenToWorldPoint(mouseWorldPoint);
-        crystalParticles.transform.position = mouseWorldPoint;
-        crystalParticles.Play();
 
-        var crystalsCount = 1;
-        AddCrystals(crystalsCount);
-        crystalInfo.ShowCrystalInfo(crystalsCount, Input.mousePosition);
+        crystalParticles.transform.position = postion;
+        crystalParticles.Play();
+        AddCrystals(crystalAmount);
+        crystalInfo.ShowCrystalInfo(crystalAmount, postion);
     }
 
     private void AddCrystals(float count)
