@@ -17,7 +17,6 @@ public class Goblin : MonoBehaviour
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
         movingVector = Vector3.zero - transform.position;
         movingVector = movingVector.normalized;
         hittingTime = 1.0f / hittingRate;
