@@ -41,10 +41,11 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
                     x.gameObject != selectedObject.gameObject
                     && x.GetComponent(selectedObject.GetType()))?
                 .GetComponent<Unit>();
-            if (unit != null && unit.IsMatch(selectedObject.GetComponent<Unit>()))
+            var selectedUnit = selectedObject.GetComponent<Unit>();
+            if (unit != null && unit.IsMatch(selectedUnit))
             {
                 unit.Merge();
-                Destroy(selectedObject.gameObject);
+                selectedUnit.Disable();
             }
             else
             {
