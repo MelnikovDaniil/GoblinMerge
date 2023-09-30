@@ -1,11 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UnitShopManager : MonoBehaviour
 {
-    public Unit goblinPrefab;
     public PurchaseButton goblinPurchaseButton;
 
     [SerializeField]
@@ -14,8 +10,6 @@ public class UnitShopManager : MonoBehaviour
     [SerializeField]
     private Vector2 spawnSize;
     private int crystalMask;
-
-    private List<Unit> unitPool = new List<Unit>();
 
     private void Awake()
     {
@@ -34,15 +28,8 @@ public class UnitShopManager : MonoBehaviour
         var spawnPosition = GetRandomSpawnPostion();
         spawnParticles.transform.position = spawnPosition;
         spawnParticles.Play();
-        var unit = unitPool.FirstOrDefault(x => !x.IsAlive);
-        if (unit == null)
-        {
-            unit = Instantiate(goblinPrefab);
-            unitPool.Add(unit);
-        }
 
-        unit.transform.position = spawnPosition;
-        unit.SetUp();
+        UnitGenerator.Instance.GetNewUnit(spawnPosition);
     }
 
     public void UpdateButtons()
