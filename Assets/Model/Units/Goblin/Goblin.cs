@@ -9,6 +9,8 @@ public class Goblin : Unit
     public float hittingRate = 1;
     public Vector3 infoPoint = Vector2.up;
 
+    public override UnitType Type => UnitType.Goblin;
+
     [SerializeField]
     private Animator _animator;
     [SerializeField]
@@ -36,6 +38,7 @@ public class Goblin : Unit
         base.SetUp(level);
         isHitting = false;
         SetMovement();
+        Upgrade();
     }
 
     public override void Disable()

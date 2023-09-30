@@ -17,6 +17,7 @@ public class CrystalManager : MonoBehaviour
         {
             currentCristalsAmount = value;
             OnCristalsAmountChange?.Invoke();
+            CrystalMapper.ChangeAmount(currentCristalsAmount);
             crystalsCountText.text = currentCristalsAmount.ToString("n0");
         }
     }
@@ -39,6 +40,15 @@ public class CrystalManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        var crystals = CrystalMapper.GetAmount();
+        var exitDate = EfficiencyMapper.GetExitDate();
+        var timeDifference = DateTime.UtcNow - exitDate;
+        var collectedCrystalsOnBg = EfficiencyMapper.GetEfficiencyInSec() * (float)timeDifference.TotalSeconds;
+        CristalsAmount = crystals + collectedCrystalsOnBg;
     }
 
     public void CrystallClick()
@@ -74,5 +84,10 @@ public class CrystalManager : MonoBehaviour
         crystalParticles.Play();
         CristalsAmount += crystalAmount;
         crystalInfo.ShowCrystalInfo(crystalAmount, postion);
+    }
+
+    private void OnApplicationQuit()
+    {
+        EfficiencyMapper.SaveExitDate();
     }
 }

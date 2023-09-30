@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(DragableObject))]
 public abstract class Unit : MonoBehaviour
 {
-    public Type Type { get => GetType(); }
+    public abstract UnitType Type { get; }
 
     public bool IsAlive { get; set; }
 
@@ -42,7 +42,7 @@ public abstract class Unit : MonoBehaviour
 
     public void RecalculateEfficiency()
     {
-        currentEfficiency = startEfficiency * Mathf.Pow(2.5f, level) * bonusCoof;
+        currentEfficiency = EfficiencyMapper.CalculateLevelEfficieny(startEfficiency, level) * bonusCoof;
     }
 
     public bool IsMatch(Unit unit)
