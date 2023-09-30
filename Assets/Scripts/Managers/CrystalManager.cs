@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,18 @@ using UnityEngine;
 public class CrystalManager : MonoBehaviour
 {
     public static CrystalManager Instance;
+    public event Action OnCristalsAmountChange;
+
+    public float CristalsAmount 
+    {
+        get { return currentCristalsAmount; }
+        set 
+        {
+            currentCristalsAmount = value;
+            OnCristalsAmountChange?.Invoke();
+            crystalsCountText.text = currentCristalsAmount.ToString("n0");
+        }
+    }
 
     [SerializeField]
     private ParticleSystem crystalParticles;
@@ -21,7 +34,8 @@ public class CrystalManager : MonoBehaviour
     private int poolLimit = 50;
     private List<CrystalInfo> crystalInfoPool = new List<CrystalInfo>();
 
-    private float cristalsCount;
+    private float currentCristalsAmount;
+    
     private void Awake()
     {
         Instance = this;
@@ -58,13 +72,7 @@ public class CrystalManager : MonoBehaviour
 
         crystalParticles.transform.position = postion;
         crystalParticles.Play();
-        AddCrystals(crystalAmount);
+        CristalsAmount += crystalAmount;
         crystalInfo.ShowCrystalInfo(crystalAmount, postion);
-    }
-
-    private void AddCrystals(float count)
-    {
-        cristalsCount += count;
-        crystalsCountText.text = cristalsCount.ToString("n0");
     }
 }

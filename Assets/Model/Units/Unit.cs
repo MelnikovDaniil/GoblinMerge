@@ -6,6 +6,8 @@ public abstract class Unit : MonoBehaviour
 {
     public Type Type { get => GetType(); }
 
+    public bool IsAlive { get; set; }
+
     public int level;
 
     public float bonusCoof = 1;
@@ -20,6 +22,22 @@ public abstract class Unit : MonoBehaviour
     {
         currentEfficiency = startEfficiency;
         _dragableObject = GetComponent<DragableObject>();
+    }
+
+    public virtual void SetUp(int level = default)
+    {
+        IsAlive = true;
+        _dragableObject.isDragging = false;
+        gameObject.SetActive(true);
+        this.level = level;
+        RecalculateEfficiency();
+    }
+
+    public virtual void Disable()
+    {
+        IsAlive = false;
+        _dragableObject.isDragging = false;
+        gameObject.SetActive(false);
     }
 
     public void RecalculateEfficiency()

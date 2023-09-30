@@ -18,7 +18,6 @@ public class Goblin : Unit
     private Vector3 movingVector;
     private float hittingTime;
 
-    private Coroutine hittingRoutine;
     protected new void Awake()
     {
         base.Awake();
@@ -30,7 +29,19 @@ public class Goblin : Unit
     private void Start()
     {
         _animator.SetFloat("hittingSpeed", hittingTime);
+    }
+
+    public override void SetUp(int level = 0)
+    {
+        base.SetUp(level);
+        isHitting = false;
         SetMovement();
+    }
+
+    public override void Disable()
+    {
+        base.Disable();
+        isHitting = false;
     }
 
     private void Update()
@@ -49,7 +60,6 @@ public class Goblin : Unit
             var hitCost = currentEfficiency / hittingRate;
             CrystalManager.Instance.HitCrystal(hitCost, transform.position + infoPoint);
         }
-        hittingRoutine = null;
     }
 
     protected override void Upgrade()
@@ -64,7 +74,7 @@ public class Goblin : Unit
         {
             _animator.SetTrigger("hit");
             isHitting = true;
-            hittingRoutine = StartCoroutine(HittingRoutine());
+            StartCoroutine(HittingRoutine());
         }
     }
 
