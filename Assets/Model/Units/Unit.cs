@@ -14,6 +14,8 @@ public abstract class Unit : MonoBehaviour
 
     public float startEfficiency;
 
+    private float levelEfficiency;
+
     protected float currentEfficiency;
 
     protected DragableObject _dragableObject;
@@ -22,6 +24,11 @@ public abstract class Unit : MonoBehaviour
     {
         currentEfficiency = startEfficiency;
         _dragableObject = GetComponent<DragableObject>();
+    }
+
+    private void FixedUpdate()
+    {
+        currentEfficiency = levelEfficiency * BonusManager.Instance.unitTypeBonusMultipliers[Type];
     }
 
     public virtual void SetUp(int level = default)
@@ -42,7 +49,7 @@ public abstract class Unit : MonoBehaviour
 
     public void RecalculateEfficiency()
     {
-        currentEfficiency = EfficiencyMapper.CalculateLevelEfficieny(startEfficiency, level) * bonusCoof;
+        levelEfficiency = EfficiencyMapper.CalculateLevelEfficieny(startEfficiency, level);
     }
 
     public bool IsMatch(Unit unit)
