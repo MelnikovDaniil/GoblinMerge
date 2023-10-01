@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class UnitShopManager : MonoBehaviour
 {
+    public static UnitShopManager Instance;
     public PurchaseButton goblinPurchaseButton;
 
     [SerializeField]
@@ -13,6 +14,7 @@ public class UnitShopManager : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         crystalMask = LayerMask.GetMask("Crystal");
         goblinPurchaseButton.button.onClick.AddListener(Purchase);
     }
