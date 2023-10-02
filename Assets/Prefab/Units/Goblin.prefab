@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
+  bonusCoof: 1
   startEfficiency: 1
   speed: 1
   hittingRate: 1
