@@ -66,6 +66,7 @@ public abstract class Unit : MonoBehaviour
     public void Merge()
     {
         level++;
+        LevelMapper.SaveLevelIfHighest(Type, level);
         RecalculateEfficiency();
         Upgrade();
     }

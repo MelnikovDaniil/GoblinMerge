@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BonusManager : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class BonusManager : MonoBehaviour
         {
             ApplyGeneralBonus,
             () => ApplyUnitBonus(UnitType.Goblin),
+            () => SpawnUnit(UnitType.Goblin),
         };
     }
 
@@ -59,6 +61,21 @@ public class BonusManager : MonoBehaviour
         StartCoroutine(ResetMultipliersRoutine(unitBonusTime));
     }
 
+    public Bonus GenerateBonus()
+    {
+        var bonusAction = bonuses.GetRandom();
+        var createdBonus = Instantiate(bonusPrefab, UnitShopManager.Instance.GetRandomSpawnPostion(), Quaternion.identity);
+        createdBonus.action = bonusAction;
+        return createdBonus;
+    }
+
+    private void SpawnUnit(UnitType unitType)
+    {
+        var position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var level = Random.Range(0, LevelMapper.GetHighestLevel(unitType) + 1);
+        UnitGenerator.Instance.GetNewUnit(position, level);
+    }
+
     private IEnumerator BonusGeneratorRoutine()
     {
         while (true)
@@ -79,13 +96,5 @@ public class BonusManager : MonoBehaviour
         {
             unitTypeBonusMultipliers[unitType] = 1f;
         }
-    }
-
-    public Bonus GenerateBonus()
-    {
-        var bonusAction = bonuses.GetRandom();
-        var createdBonus = Instantiate(bonusPrefab, UnitShopManager.Instance.GetRandomSpawnPostion(), Quaternion.identity);
-        createdBonus.action = bonusAction;
-        return createdBonus;
     }
 }

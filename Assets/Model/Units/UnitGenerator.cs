@@ -32,7 +32,7 @@ public class UnitGenerator : MonoBehaviour
         }
     }
 
-    public Unit GetNewUnit(Vector2 spawnPosition)
+    public Unit GetNewUnit(Vector2 spawnPosition, int level = 0)
     {
         var unit = unitPool.FirstOrDefault(x => !x.IsAlive);
         if (unit == null)
@@ -42,7 +42,7 @@ public class UnitGenerator : MonoBehaviour
         }
 
         unit.transform.position = spawnPosition;
-        unit.SetUp();
+        unit.SetUp(level);
         return unit;
     }
 
