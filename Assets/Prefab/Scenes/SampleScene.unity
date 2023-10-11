@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goblinPurchaseButton: {fileID: 1136178156}
+  goblinCostsFile: {fileID: 4900000, guid: 697144313cc76d746bbd47d1833ad6f0, type: 3}
   spawnParticles: {fileID: 1994255177}
   spawnSize: {x: 6, y: 11}
 --- !u!1 &367651601
@@ -6054,6 +6055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 1136178153}
   costText: {fileID: 1491173976}
+  cost: 0
 --- !u!1 &1282015746
 GameObject:
   m_ObjectHideFlags: 0

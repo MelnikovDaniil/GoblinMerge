@@ -14,11 +14,16 @@ public class UnitGenerator : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        RestoreAll();
     }
 
     private void Start()
     {
-        RestoreAll();
+    }
+
+    public IEnumerable<Unit> GetAliveUnits()
+    {
+        return unitPool.Where(x => x.IsAlive);
     }
 
     public void RestoreAll()
