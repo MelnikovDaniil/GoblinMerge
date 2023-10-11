@@ -8,4 +8,5 @@ public class PurchaseButton : MonoBehaviour
 {
     public Button button;
     public TextMeshProUGUI costText;
+    public float cost;
 }
