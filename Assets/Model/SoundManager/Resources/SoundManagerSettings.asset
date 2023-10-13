@@ -18,4 +18,7 @@ MonoBehaviour:
   MusicFadeTime: 2
   MusicAudioMixerGroup: {fileID: 24331956, guid: 4cd8705c9141fa0438ec2ab9ffaf3e2c, type: 2}
   SoundAudioMixerGroup: {fileID: 24325162, guid: 4cd8705c9141fa0438ec2ab9ffaf3e2c, type: 2}
-  PreloadedLoadedClips: []
+  PreloadedLoadedClips:
+  - {fileID: 8300000, guid: 356a586eed30c2b4e8aca3c34cd41aba, type: 3}
+  - {fileID: 8300000, guid: b343940693c9e9e4fbd0e44c946d9bea, type: 3}
+  - {fileID: 8300000, guid: 106281a4fce79854a86a74c41a7eedd0, type: 3}

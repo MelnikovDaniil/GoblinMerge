@@ -10,6 +10,7 @@ public class Bonus : MonoBehaviour
     private void OnMouseDown()
     {
         action?.Invoke();
+        SoundManager.PlaySound("Bonus");
         gameObject.SetActive(false);
     }
 }
