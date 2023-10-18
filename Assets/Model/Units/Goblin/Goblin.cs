@@ -7,6 +7,7 @@ public class Goblin : Unit
 {
     public float speed;
     public float hittingRate = 1;
+    public float standupTime = 1.5f;
     public Vector3 infoPoint = Vector2.up;
 
     public override UnitType Type => UnitType.Goblin;
@@ -18,19 +19,22 @@ public class Goblin : Unit
 
     private bool isHitting;
     private Vector3 movingVector;
-    private float hittingTime;
+    private float hittingSpeed;
+    private float standupSpeed;
 
     protected new void Awake()
     {
         base.Awake();
         _dragableObject.OnDrop += Drop;
         _dragableObject.OnDrag += Drag;
-        hittingTime = 1.0f / hittingRate;
+        hittingSpeed = 1.0f / hittingRate;
+        standupSpeed = 1.0f / standupTime;
     }
 
     private void Start()
     {
-        _animator.SetFloat("hittingSpeed", hittingTime);
+        _animator.SetFloat("hittingSpeed", hittingSpeed);
+        _animator.SetFloat("standupSpeed", standupSpeed);
     }
 
     public override void SetUp(int level = 0)
@@ -59,7 +63,7 @@ public class Goblin : Unit
     {
         while (isHitting)
         {
-            yield return new WaitForSeconds(hittingTime);
+            yield return new WaitForSeconds(hittingSpeed);
             var hitCost = currentEfficiency / hittingRate;
             CrystalManager.Instance.HitCrystal(hitCost, transform.position + infoPoint);
         }
@@ -75,14 +79,15 @@ public class Goblin : Unit
     {
         if (isHitting == false)
         {
-            _animator.SetTrigger("hit");
             isHitting = true;
+            _animator.SetTrigger("hit");
             StartCoroutine(HittingRoutine());
         }
     }
 
     private void Drag()
     {
+        movingVector = Vector3.zero;
         isHitting = false;
         _animator.SetBool("isDragging", true);
     }
@@ -90,15 +95,14 @@ public class Goblin : Unit
     private void Drop()
     {
         _animator.SetBool("isDragging", false);
-        if (Physics2D.OverlapCircleAll(transform.position, 0.5f)
-            .Any(x => x.CompareTag("Crystal")))
-        {
-            StartHitting();
-        }
-        else
-        {
-            SetMovement();
-        }
+        StartCoroutine(StandupRouting());
+    }
+
+    private IEnumerator StandupRouting()
+    {
+        yield return new WaitForSeconds(standupTime);
+        SetMovement();
+
     }
 
     private void SetMovement()

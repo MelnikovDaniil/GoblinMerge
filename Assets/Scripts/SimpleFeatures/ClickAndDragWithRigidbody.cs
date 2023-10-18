@@ -24,7 +24,7 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
     void Update()
     {
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !selectedObject)
         {
             Collider2D targetObject = Physics2D.OverlapPoint(mousePosition, unitLayerMask);
             if (targetObject)
