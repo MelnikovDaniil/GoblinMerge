@@ -44,11 +44,19 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
             var selectedUnit = selectedObject.GetComponent<Unit>();
             if (unit != null && unit.IsMatch(selectedUnit))
             {
+                SoundManager.PlaySound("Merge");
                 unit.Merge();
                 selectedUnit.Disable();
             }
             else
             {
+                var crystal = Physics2D.OverlapPoint(mousePosition, LayerMask.GetMask("Crystal"));
+                if (crystal != null)
+                {
+                    var radius = ((CircleCollider2D)crystal).radius;
+                    selectedObject.transform.position = crystal.transform.position + 
+                        selectedObject.transform.position.normalized * selectedObject.transform.localScale.x * radius;
+                }
                 selectedObject.Drop();
             }
             selectedObject = null;
