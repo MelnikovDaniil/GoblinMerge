@@ -482,6 +482,7 @@ GameObject:
   - component: {fileID: 5350562042295264592}
   - component: {fileID: 5350562042295264593}
   - component: {fileID: 7790773392748818496}
+  - component: {fileID: 6320230938545509238}
   m_Layer: 3
   m_Name: Goblin
   m_TagString: Untagged
@@ -577,6 +578,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDragging: 0
+--- !u!114 &6320230938545509238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5350562042295264605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98aebaa5a66bdcf418635ea234fb0851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundGroups:
+  - groupName: Spawn
+    audioClips:
+    - {fileID: 8300000, guid: e8deedb1f6b78cf4fa7ecbc8966a3a58, type: 3}
+    - {fileID: 8300000, guid: 9671371791c2a1d4d9caca67bb079f8c, type: 3}
+    - {fileID: 8300000, guid: bc4c1ba94188d3e43a97ebbd1e0037b3, type: 3}
+    - {fileID: 8300000, guid: a031911a40a8ff34e8825a8badd2962a, type: 3}
+    - {fileID: 8300000, guid: b516751da9be4ca46899715077afc7fa, type: 3}
+    - {fileID: 8300000, guid: db897bae910fe3245a6e3b54c9437d02, type: 3}
+    - {fileID: 8300000, guid: 89bd715444b65d048961a363b70129f1, type: 3}
+    - {fileID: 8300000, guid: 73b5bd184ce67534c8b2fbd463b4f2ef, type: 3}
+  - groupName: Drag
+    audioClips:
+    - {fileID: 8300000, guid: a3646c9f79c40ab4a9e08390500c843d, type: 3}
+    - {fileID: 8300000, guid: a565e66d7bdf42f488ecfdd24c735bfc, type: 3}
+    - {fileID: 8300000, guid: 247025533e8dd5d48a22d9e881e4cbd5, type: 3}
+    - {fileID: 8300000, guid: a1dadc27e5894c54c9b5efe4c0112662, type: 3}
+    - {fileID: 8300000, guid: 182d3423eb508ec4b816f553ba522109, type: 3}
+    - {fileID: 8300000, guid: 90911f4e2e1b6764f8971527ecf17080, type: 3}
+  - groupName: Merge
+    audioClips:
+    - {fileID: 8300000, guid: 6bf67a335b7b5784e9b19f21631387dc, type: 3}
+    - {fileID: 8300000, guid: 66bde5ddb2b619f4a8034b0a7b864138, type: 3}
+    - {fileID: 8300000, guid: 080baa2edf7a39e42bf54ab144dacc2e, type: 3}
+    - {fileID: 8300000, guid: 771e95abf0de415409e58309d8fca884, type: 3}
+    - {fileID: 8300000, guid: f0685c2772d8df84192508dd87150401, type: 3}
+    - {fileID: 8300000, guid: 9a18f286f71b3cf4cb8e610c9b9878fb, type: 3}
+  - groupName: Fall
+    audioClips:
+    - {fileID: 8300000, guid: 1625773b4d8c1ac4d8c6fa7f5738b8d0, type: 3}
+    - {fileID: 8300000, guid: edfa74e83f24fea4a9a5d92b3089622c, type: 3}
+    - {fileID: 8300000, guid: 9dd433df9d95c0a41899fb5c1cc2212c, type: 3}
+    - {fileID: 8300000, guid: 6b08340cdb32cba438ce26b115396f6b, type: 3}
+    - {fileID: 8300000, guid: 3de86bdaabf2bdb449e3f7727f753e5a, type: 3}
+    - {fileID: 8300000, guid: 402ed8d365f86cb489d46b1e5c798599, type: 3}
 --- !u!1 &5350562042751734974
 GameObject:
   m_ObjectHideFlags: 0

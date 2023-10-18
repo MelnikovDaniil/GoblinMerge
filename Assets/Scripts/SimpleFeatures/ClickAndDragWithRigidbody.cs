@@ -44,6 +44,7 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
             var selectedUnit = selectedObject.GetComponent<Unit>();
             if (unit != null && unit.IsMatch(selectedUnit))
             {
+                SoundManager.PlaySound("Merge");
                 unit.Merge();
                 selectedUnit.Disable();
             }

@@ -45,7 +45,7 @@ public class UnitGenerator : MonoBehaviour
             unit = Instantiate(goblinPrefab);
             unitPool.Add(unit);
         }
-
+        SoundManager.PlaySound("Spawn");
         unit.transform.position = spawnPosition;
         unit.SetUp(level);
         return unit;

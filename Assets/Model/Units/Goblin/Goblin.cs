@@ -17,6 +17,8 @@ public class Goblin : Unit
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
 
+    private SoundGroupManagerComponent _soundGroupManagerComponent;
+
     private bool isHitting;
     private Vector3 movingVector;
     private float hittingSpeed;
@@ -25,6 +27,7 @@ public class Goblin : Unit
     protected new void Awake()
     {
         base.Awake();
+        _soundGroupManagerComponent = GetComponent<SoundGroupManagerComponent>();
         _dragableObject.OnDrop += Drop;
         _dragableObject.OnDrag += Drag;
         hittingSpeed = 1.0f / hittingRate;
@@ -40,9 +43,12 @@ public class Goblin : Unit
     public override void SetUp(int level = 0)
     {
         base.SetUp(level);
+        _animator.SetFloat("hittingSpeed", hittingSpeed);
+        _animator.SetFloat("standupSpeed", standupSpeed);
+        _soundGroupManagerComponent.PlaySoundFromGroup("Spawn");
         isHitting = false;
         SetMovement();
-        Upgrade();
+        _spriteRenderer.sprite = ClickAndDragWithRigidbody.Instance.unitSprites[level];
     }
 
     public override void Disable()
@@ -71,8 +77,8 @@ public class Goblin : Unit
 
     protected override void Upgrade()
     {
+        _soundGroupManagerComponent.PlaySoundFromGroup("Merge");
         _spriteRenderer.sprite = ClickAndDragWithRigidbody.Instance.unitSprites[level];
-        Debug.Log("Upgraded level - " + level);
     }
 
     private void StartHitting()
@@ -90,6 +96,7 @@ public class Goblin : Unit
         movingVector = Vector3.zero;
         isHitting = false;
         _animator.SetBool("isDragging", true);
+        _soundGroupManagerComponent.PlaySoundFromGroup("Drag");
     }
 
     private void Drop()
@@ -100,9 +107,16 @@ public class Goblin : Unit
 
     private IEnumerator StandupRouting()
     {
+        _soundGroupManagerComponent.PlaySoundFromGroup("Fall");
         yield return new WaitForSeconds(standupTime);
-        SetMovement();
-
+        if (Physics2D.OverlapCircleAll(transform.position, 0.5f)
+            .Any(x => x.CompareTag("Crystal")))
+        {
+            StartHitting();
+        }
+        {
+            SetMovement();
+        }
     }
 
     private void SetMovement()

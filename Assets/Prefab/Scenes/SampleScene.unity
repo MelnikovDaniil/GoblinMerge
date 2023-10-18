@@ -5866,7 +5866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bonusPrefab: {fileID: 5612343354201037615, guid: 6ba5453a474b06c4cb1deac7e4454db1, type: 3}
-  bonusSpawnRate: 300
+  bonusSpawnRate: 90
   bonusLiveTime: 15
   generalBonusTime: 30
   generalBonusMultiplier: 2
@@ -6679,7 +6679,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundGroups:
   - groupName: Crystal
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: cb0a449f5c8819744905c48a20a69c82, type: 3}
+    - {fileID: 8300000, guid: 5e45aae812c8ce9498ffbff476f6589c, type: 3}
+    - {fileID: 8300000, guid: 857582442d1fef94aa0f139a9bf124cf, type: 3}
+    - {fileID: 8300000, guid: b922c81ad1b49454ea509e90e47fb69e, type: 3}
+    - {fileID: 8300000, guid: b3925b044eab59046b12d240f0ba7831, type: 3}
 --- !u!1 &1872152991
 GameObject:
   m_ObjectHideFlags: 0

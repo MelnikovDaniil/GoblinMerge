@@ -36,6 +36,7 @@ public class UnitShopManager : MonoBehaviour
     public void Purchase(float cost)
     {
         CrystalManager.Instance.CristalsAmount -= cost;
+        SoundManager.PlaySoundUI("Button");
         var spawnPosition = GetRandomSpawnPostion();
         spawnParticles.transform.position = spawnPosition;
         spawnParticles.Play();
