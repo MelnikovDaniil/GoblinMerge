@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public static class CollectionExtension
 {
+    private static Random random = new Random();
     public static T GetRandom<T>(this IEnumerable<T> collection)
     {
-        var randomElementNumber = Random.Range(0, collection.Count());
+        var randomElementNumber = random.Next(0, collection.Count());
         return collection.ElementAt(randomElementNumber);
     }
 
@@ -17,7 +18,7 @@ public static class CollectionExtension
             return default(T);
         }
 
-        var randomElementNumber = Random.Range(0, collection.Count());
+        var randomElementNumber = random.Next(0, collection.Count());
         return collection.ElementAt(randomElementNumber);
     }
 }
