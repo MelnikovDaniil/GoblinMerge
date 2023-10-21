@@ -15,6 +15,7 @@ public class UnitGenerator : MonoBehaviour
     {
         Instance = this;
         RestoreAll();
+        SoundManager.Sounds.ForEach(x => x.Stop());
     }
 
     private void Start()

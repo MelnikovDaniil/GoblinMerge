@@ -709,6 +709,14 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 6b08340cdb32cba438ce26b115396f6b, type: 3}
     - {fileID: 8300000, guid: 3de86bdaabf2bdb449e3f7727f753e5a, type: 3}
     - {fileID: 8300000, guid: 402ed8d365f86cb489d46b1e5c798599, type: 3}
+  - groupName: Hit
+    audioClips:
+    - {fileID: 8300000, guid: 9a47a7f6273c998488e9a9361947dffb, type: 3}
+    - {fileID: 8300000, guid: 77613b5b77f0cc046a08598b15fcde0c, type: 3}
+    - {fileID: 8300000, guid: 4820f30f951ee2348a64f979d1830031, type: 3}
+    - {fileID: 8300000, guid: 53ce1113c6c39d44f842165b31865ade, type: 3}
+    - {fileID: 8300000, guid: de63c3be75f01164fbc05d1161bd90b5, type: 3}
+    - {fileID: 8300000, guid: 2553f5d54fb6a5e418522390ead1f643, type: 3}
 --- !u!1 &5350562042751734974
 GameObject:
   m_ObjectHideFlags: 0
