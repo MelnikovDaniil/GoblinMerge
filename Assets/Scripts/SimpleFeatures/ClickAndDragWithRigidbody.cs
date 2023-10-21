@@ -36,13 +36,13 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0) && selectedObject)
         {
-            var colliders = Physics2D.OverlapCircleAll(mousePosition, mergeDetectionRadius, unitLayerMask);
-            var unit = colliders.FirstOrDefault(x => 
-                    x.gameObject != selectedObject.gameObject
-                    && x.GetComponent(selectedObject.GetType()))?
-                .GetComponent<Unit>();
             var selectedUnit = selectedObject.GetComponent<Unit>();
-            if (unit != null && unit.IsMatch(selectedUnit))
+            var colliders = Physics2D.OverlapCircleAll(mousePosition, mergeDetectionRadius, unitLayerMask);
+            var unit = colliders.Select(x => x.GetComponent<Unit>())
+                .FirstOrDefault(x => 
+                    x.gameObject != selectedObject.gameObject
+                    && x.IsMatch(selectedUnit));
+            if (unit != null)
             {
                 SoundManager.PlaySound("Merge");
                 unit.Merge();

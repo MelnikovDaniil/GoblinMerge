@@ -67,10 +67,15 @@ public class Goblin : Unit
 
     private IEnumerator HittingRoutine()
     {
+        _animator.SetTrigger("hit");
+        _animator.speed = 0;
+        yield return new WaitForSeconds(Random.value);
+        _animator.speed = 1;
         while (isHitting)
         {
             yield return new WaitForSeconds(hittingSpeed);
             var hitCost = currentEfficiency / hittingRate;
+            _soundGroupManagerComponent.PlaySoundFromGroup("Hit");
             CrystalManager.Instance.HitCrystal(hitCost, transform.position + infoPoint);
         }
     }
@@ -86,7 +91,6 @@ public class Goblin : Unit
         if (isHitting == false)
         {
             isHitting = true;
-            _animator.SetTrigger("hit");
             StartCoroutine(HittingRoutine());
         }
     }
