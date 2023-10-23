@@ -8,7 +8,7 @@ using UnityEngine;
 public class CrystalManager : MonoBehaviour
 {
     public static CrystalManager Instance;
-    public event Action OnCristalsAmountChange;
+    public event Action<float> OnCristalsAmountChange;
 
     public float CristalsAmount 
     {
@@ -16,7 +16,7 @@ public class CrystalManager : MonoBehaviour
         set 
         {
             currentCristalsAmount = value;
-            OnCristalsAmountChange?.Invoke();
+            OnCristalsAmountChange?.Invoke(currentCristalsAmount);
             CrystalMapper.ChangeAmount(currentCristalsAmount);
             crystalsCountText.text = currentCristalsAmount.ToString("n0");
         }

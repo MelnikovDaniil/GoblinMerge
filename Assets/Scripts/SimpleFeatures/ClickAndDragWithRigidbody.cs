@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class ClickAndDragWithRigidbody : MonoBehaviour
 {
     public static ClickAndDragWithRigidbody Instance;
+    public event Action OnMerge;
     public float mergeDetectionRadius = 1f;
 
     public List<Sprite> unitSprites;
@@ -46,6 +48,7 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
             {
                 SoundManager.PlaySound("Merge");
                 unit.Merge();
+                OnMerge?.Invoke();
                 selectedUnit.Disable();
             }
             else
