@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using UnityEngine;
 public class UnitGenerator : MonoBehaviour
 {
     public static UnitGenerator Instance;
+    public event Action OnUnitCreation;
 
     public Unit goblinPrefab;
 
@@ -49,6 +51,7 @@ public class UnitGenerator : MonoBehaviour
         SoundManager.PlaySound("Spawn");
         unit.transform.position = spawnPosition;
         unit.SetUp(level);
+        OnUnitCreation?.Invoke();
         return unit;
     }
 

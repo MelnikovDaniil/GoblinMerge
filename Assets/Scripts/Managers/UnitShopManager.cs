@@ -29,7 +29,7 @@ public class UnitShopManager : MonoBehaviour
     private void Start()
     {
         RecalculateCosts();
-        CrystalManager.Instance.OnCristalsAmountChange += UpdateButtons;
+        CrystalManager.Instance.OnCristalsAmountChange += a => UpdateButtons();
         UpdateButtons();
     }
 
@@ -64,7 +64,7 @@ public class UnitShopManager : MonoBehaviour
         var x = spawnSize.x / 2f;
         var y = spawnSize.y / 2f;
         var spawnPosition = new Vector2(Random.Range(-x, x), Random.Range(-y, y));
-        var point = Physics2D.OverlapPoint(spawnPosition, crystalMask);
+        var point = Physics2D.OverlapCircle(spawnPosition, 0.5f, crystalMask);
         if (point != null)
         {
             return GetRandomSpawnPostion();
