@@ -11,6 +11,8 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
 
     public List<Sprite> unitSprites;
 
+    public ParticleSystem mergeParticles;
+
     private DragableObject selectedObject;
     private Vector3 offset;
     private Vector3 mousePosition;
@@ -48,6 +50,8 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
             {
                 SoundManager.PlaySound("Merge");
                 unit.Merge();
+                mergeParticles.transform.position = unit.transform.position;
+                mergeParticles.Play();
                 OnMerge?.Invoke();
                 selectedUnit.Disable();
             }
