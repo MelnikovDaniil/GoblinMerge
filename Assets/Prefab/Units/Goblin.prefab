@@ -610,6 +610,7 @@ MonoBehaviour:
   hittingRate: 1
   standupTime: 1.5
   infoPoint: {x: 0, y: 1, z: 0}
+  hitPosition: {x: 0.52, y: 0.1, z: 0}
   _animator: {fileID: 6592383823067725418}
   _spriteRenderer: {fileID: 5350562042751734972}
 --- !u!58 &5350562042295264592

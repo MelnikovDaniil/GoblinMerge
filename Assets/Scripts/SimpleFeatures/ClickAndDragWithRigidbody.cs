@@ -8,6 +8,7 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
     public static ClickAndDragWithRigidbody Instance;
     public event Action OnMerge;
     public float mergeDetectionRadius = 1f;
+    public ParticleSystem mergeParticles;
 
     public List<Sprite> unitSprites;
 
@@ -49,6 +50,8 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
             if (unit != null)
             {
                 SoundManager.PlaySound("Merge");
+                mergeParticles.transform.position = unit.transform.position;
+                mergeParticles.Play();
                 unit.Merge();
                 mergeParticles.transform.position = unit.transform.position;
                 mergeParticles.Play();
