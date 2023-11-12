@@ -12,8 +12,6 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
 
     public List<Sprite> unitSprites;
 
-    public ParticleSystem mergeParticles;
-
     private DragableObject selectedObject;
     private Vector3 offset;
     private Vector3 mousePosition;
