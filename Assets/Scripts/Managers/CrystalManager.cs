@@ -18,7 +18,7 @@ public class CrystalManager : MonoBehaviour
             currentCristalsAmount = value;
             OnCristalsAmountChange?.Invoke(currentCristalsAmount);
             CrystalMapper.ChangeAmount(currentCristalsAmount);
-            crystalsCountText.text = currentCristalsAmount.ToString("n0");
+            crystalsCountText.text = currentCristalsAmount.ToString("n0") + " <sprite name=\"CrystalIcon1_0\">";
         }
     }
 
@@ -34,6 +34,7 @@ public class CrystalManager : MonoBehaviour
     [SerializeField]
     private int poolLimit = 50;
     private List<CrystalInfo> crystalInfoPool = new List<CrystalInfo>();
+    private List<ParticleSystem> crystalParticlesPool = new List<ParticleSystem>();
 
     private float currentCristalsAmount;
     
@@ -59,12 +60,13 @@ public class CrystalManager : MonoBehaviour
         mouseWorldPoint.z = 10.0f;
         mouseWorldPoint = Camera.main.ScreenToWorldPoint(mouseWorldPoint);
 
-        HitCrystal(crystalsCount, mouseWorldPoint);
+        HitCrystal(crystalsCount, mouseWorldPoint + Vector3.up, mouseWorldPoint);
     }
 
-    public void HitCrystal(float crystalAmount, Vector2 postion)
+    public void HitCrystal(float crystalAmount, Vector2 postion, Vector2 hitPosition)
     {
         var crystalInfo = crystalInfoPool.FirstOrDefault(x => !x.isBusy);
+        var particles = crystalParticlesPool.FirstOrDefault(x => !x.isPlaying);
         if (crystalInfo == null)
         {
             if (crystalInfoPool.Count < poolLimit)
@@ -72,16 +74,20 @@ public class CrystalManager : MonoBehaviour
                 crystalInfo = Instantiate(crystalInfoPrefab, displayCanvas.transform);
                 crystalInfo.canvas = displayCanvas;
                 crystalInfoPool.Add(crystalInfo);
+
+                particles = Instantiate(crystalParticles);
+                crystalParticlesPool.Add(particles);
             }
             else
             {
                 crystalInfo = crystalInfoPool.First();
+                particles = crystalParticlesPool.First();
             }
         }
 
 
-        crystalParticles.transform.position = postion;
-        crystalParticles.Play();
+        particles.transform.position = hitPosition;
+        particles.Play();
         CristalsAmount += crystalAmount;
         crystalInfo.ShowCrystalInfo(crystalAmount, postion);
     }

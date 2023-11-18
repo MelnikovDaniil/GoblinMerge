@@ -9,6 +9,7 @@ public class Goblin : Unit
     public float hittingRate = 1;
     public float standupTime = 1.5f;
     public Vector3 infoPoint = Vector2.up;
+    public Vector3 hitPosition;
 
     public override UnitType Type => UnitType.Goblin;
 
@@ -76,7 +77,9 @@ public class Goblin : Unit
             yield return new WaitForSeconds(hittingSpeed);
             var hitCost = currentEfficiency / hittingRate;
             _soundGroupManagerComponent.PlaySoundFromGroup("Hit");
-            CrystalManager.Instance.HitCrystal(hitCost, transform.position + infoPoint);
+
+            var scaledHitPos = transform.position + new Vector3(Mathf.Sign(transform.localScale.x) * hitPosition.x, hitPosition.y);
+            CrystalManager.Instance.HitCrystal(hitCost, transform.position + infoPoint, scaledHitPos);
         }
     }
 
@@ -141,5 +144,7 @@ public class Goblin : Unit
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireCube(transform.position + infoPoint, Vector2.one);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + hitPosition, 0.2f);
     }
 }

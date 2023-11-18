@@ -9,6 +9,8 @@ public class BonusManager : MonoBehaviour
     public static BonusManager Instance;
 
     public Bonus bonusPrefab;
+    public GameObject bonusEffect;
+
     public float bonusSpawnRate = (float)TimeSpan.FromMinutes(5).TotalSeconds;
     public float bonusLiveTime = 15;
 
@@ -47,6 +49,7 @@ public class BonusManager : MonoBehaviour
 
     public void ApplyGeneralBonus()
     {
+        bonusEffect.SetActive(true);
         var unitTypes = new List<UnitType>(unitTypeBonusMultipliers.Keys);
         foreach (var unitType in unitTypes)
         {
@@ -57,6 +60,7 @@ public class BonusManager : MonoBehaviour
 
     public void ApplyUnitBonus(UnitType unitType)
     {
+        bonusEffect.SetActive(true);
         unitTypeBonusMultipliers[unitType] = unitBonusMultiplier;
         StartCoroutine(ResetMultipliersRoutine(unitBonusTime));
     }
@@ -91,6 +95,7 @@ public class BonusManager : MonoBehaviour
     private IEnumerator ResetMultipliersRoutine(float bonusTime)
     {
         yield return new WaitForSeconds(bonusTime);
+        bonusEffect.SetActive(false);
         var unitTypes = new List<UnitType>(unitTypeBonusMultipliers.Keys);
         foreach (var unitType in unitTypes)
         {
