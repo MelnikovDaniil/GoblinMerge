@@ -22,7 +22,7 @@ public class CrystalInfo : MonoBehaviour
         _camera = Camera.main;
         _animator = GetComponent<Animator>();
         _rectTransform = GetComponent<RectTransform>();
-       _screenCenter = new Vector2(Screen.width, Screen.height) / 2f;
+        _screenCenter = new Vector2(Screen.width, Screen.height) / 2f;
     }
 
     public void ShowCrystalInfo(float count, Vector3 worldPosition)
@@ -34,7 +34,7 @@ public class CrystalInfo : MonoBehaviour
         newPos -= _screenCenter;
 
         _rectTransform.anchoredPosition = newPos;
-        lable.text = count.ToString();
+        lable.text = count.ToString("f1");
 
         _animator.SetFloat("speedMultiplier", 1.0f / animationTime);
         _animator.Play("CrystalInfo_Show", 0, 0);

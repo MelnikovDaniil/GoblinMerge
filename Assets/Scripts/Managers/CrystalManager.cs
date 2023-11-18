@@ -18,7 +18,7 @@ public class CrystalManager : MonoBehaviour
             currentCristalsAmount = value;
             OnCristalsAmountChange?.Invoke(currentCristalsAmount);
             CrystalMapper.ChangeAmount(currentCristalsAmount);
-            crystalsCountText.text = currentCristalsAmount.ToString("n0");
+            crystalsCountText.text = currentCristalsAmount.ToString("n0") + " <sprite name=\"CrystalIcon1_0\">";
         }
     }
 
