@@ -11384,6 +11384,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ebe3ef4c87f2ed640a9cfec700bfa85d, type: 3}
   - {fileID: 21300000, guid: 313b661a1b2c8b64fa07ca134feb0c5d, type: 3}
   - {fileID: 21300000, guid: 9954ad21d7cd9f145a15244202b44af9, type: 3}
+  scaleAfterMergeCoof: 1
 --- !u!114 &1127867891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11417,6 +11418,7 @@ MonoBehaviour:
   generalBonusMultiplier: 2
   unitBonusTime: 30
   unitBonusMultiplier: 7
+  buttonSpawnGoblinLevel: 1
 --- !u!114 &1127867893
 MonoBehaviour:
   m_ObjectHideFlags: 0

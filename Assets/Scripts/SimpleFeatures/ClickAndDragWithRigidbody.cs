@@ -12,6 +12,8 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
 
     public List<Sprite> unitSprites;
 
+    public float scaleAfterMergeCoof = 1;
+
     private DragableObject selectedObject;
     private Vector3 offset;
     private Vector3 mousePosition;
@@ -51,6 +53,7 @@ public class ClickAndDragWithRigidbody : MonoBehaviour
                 mergeParticles.transform.position = unit.transform.position;
                 mergeParticles.Play();
                 unit.Merge();
+                unit.transform.localScale *= scaleAfterMergeCoof;
                 mergeParticles.transform.position = unit.transform.position;
                 mergeParticles.Play();
                 OnMerge?.Invoke();

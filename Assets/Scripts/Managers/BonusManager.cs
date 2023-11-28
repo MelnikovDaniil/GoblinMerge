@@ -4,6 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum BonusType
+{
+    Unknown = 0,
+    GeneralBoost,
+    UnitTypeBoost,
+    UnitSpawn,
+}
+
 public class BonusManager : MonoBehaviour
 {
     public static BonusManager Instance;
@@ -24,16 +32,18 @@ public class BonusManager : MonoBehaviour
 
     public Dictionary<UnitType, float> unitTypeBonusMultipliers = new Dictionary<UnitType, float>();
 
-    private List<Action> bonuses;
+    private Dictionary<BonusType, Action> bonuses;
+
+    [Space]
+    public int buttonSpawnGoblinLevel = 1;
     private void Awake()
     {
         Instance = this;
-        bonuses = new List<Action>
-        {
-            ApplyGeneralBonus,
-            () => ApplyUnitBonus(UnitType.Goblin),
-            () => SpawnUnit(UnitType.Goblin),
-        };
+        bonuses = new Dictionary<BonusType, Action>();
+        bonuses.Add(BonusType.GeneralBoost, ApplyGeneralBonus);
+        bonuses.Add(BonusType.UnitTypeBoost, () => ApplyUnitBonus(UnitType.Goblin));
+        bonuses.Add(BonusType.UnitSpawn, () => SpawnUnit(UnitType.Goblin));
+        
     }
 
     private void Start()
@@ -65,18 +75,24 @@ public class BonusManager : MonoBehaviour
         StartCoroutine(ResetMultipliersRoutine(unitBonusTime));
     }
 
-    public Bonus GenerateBonus()
+    public Bonus GenerateBonus(BonusType bonusType = BonusType.Unknown)
     {
-        var bonusAction = bonuses.GetRandom();
+        var bonusAction = bonuses.GetValueOrDefault(bonusType) ?? bonuses.GetRandom().Value;
         var createdBonus = Instantiate(bonusPrefab, UnitShopManager.Instance.GetRandomSpawnPostion(), Quaternion.identity);
         createdBonus.action = bonusAction;
         return createdBonus;
     }
 
-    private void SpawnUnit(UnitType unitType)
+    public void SpawnUnit(UnitType unitType)
+    {
+        var randomLevel = Random.Range(0, LevelMapper.GetHighestLevel(unitType) + 1);
+        SpawnUnit(unitType, randomLevel);
+    }
+
+    // TODO: Implement unitType
+    public void SpawnUnit(UnitType unitType, int level)
     {
         var position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var level = Random.Range(0, LevelMapper.GetHighestLevel(unitType) + 1);
         UnitGenerator.Instance.GetNewUnit(position, level);
     }
 
